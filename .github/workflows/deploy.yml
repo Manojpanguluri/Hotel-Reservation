@@ -1,0 +1,39 @@
+name: Deploy Hotel Reservation to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::468683594609:role/HotelReservationGitHubActions
+          aws-region: eu-north-1
+
+      - name: Deploy to EC2
+        run: |
+          aws ssm send-command \
+            --instance-ids i-0074113fbeadc1be \
+            --document-name "AWS-RunShellScript" \
+            --parameters 'commands=[
+              "cd /home/ubuntu/Hotel-Reservation",
+              "git fetch origin",
+              "git reset --hard origin/main",
+              "npm install",
+              "cd client",
+              "npm install",
+              "NODE_OPTIONS=\"--max-old-space-size=768\" npm run build",
+              "cd ..",
+              "pm2 restart hotel-reservation --update-env"
+            ]' \
+            --region eu-north-1
