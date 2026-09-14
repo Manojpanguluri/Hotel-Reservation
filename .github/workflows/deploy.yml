@@ -23,7 +23,7 @@ jobs:
       - name: Deploy to EC2
         run: |
           aws ssm send-command \
-            --instance-ids i-0074113fbeadc1be \
+            --instance-ids i-0074113fbeaadc1be \
             --document-name "AWS-RunShellScript" \
             --parameters 'commands=[
               "cd /home/ubuntu/Hotel-Reservation",
