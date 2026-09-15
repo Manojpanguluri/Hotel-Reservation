@@ -27,16 +27,7 @@ jobs:
             --instance-ids i-0074113fbeaadc1be \
             --document-name "AWS-RunShellScript" \
             --parameters 'commands=[
-              "set -e",
-              "cd /home/ubuntu/Hotel-Reservation",
-              "git fetch origin",
-              "git reset --hard origin/main",
-              "npm install",
-              "cd client",
-              "npm install",
-              "NODE_OPTIONS=\"--max-old-space-size=768\" npm run build",
-              "cd ..",
-              "pm2 restart hotel-reservation --update-env"
+              "sudo -u ubuntu -H bash -lc '\''set -e; cd /home/ubuntu/Hotel-Reservation; git fetch origin; git reset --hard origin/main; npm install; cd client; npm install; NODE_OPTIONS=\"--max-old-space-size=768\" npm run build; cd ..; pm2 restart hotel-reservation --update-env'\''"
             ]' \
             --region eu-north-1 \
             --query "Command.CommandId" \
