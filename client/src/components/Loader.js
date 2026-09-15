@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 function Loader() {
-  let [loading, setLoading] = useState(true);
-
   return (
     <div style={{ marginTop: "150px" }}>
       <div className="sweet-loading text-center">
         <ScaleLoader
-          color="#000"
-          loading={loading}
+          color="#c5a880"
+          loading={true}
           css=""
           size={150}
           aria-label="Loading Spinner"

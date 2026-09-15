@@ -6,6 +6,7 @@ const roomScheme = mongoose.Schema(
       type: String,
       required: true,
     },
+roomNumber: { type: String, unique: true, required: true },
     maxcount: {
       type: Number,
       required: true,

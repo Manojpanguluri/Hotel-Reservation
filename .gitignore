@@ -2,3 +2,4 @@
 nodemodules/
 client/nodemodules/
 node_modules
+client/build/
